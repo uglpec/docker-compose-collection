@@ -3,7 +3,8 @@ version: '3.1'
 services:
 
   wordpress:
-    image: wordpress
+    # use latest tag or specify version
+    image: wordpress:4.9.8-php7.2-apache
     restart: always
     ports:
       - 8080:80
@@ -16,6 +17,7 @@ services:
       - wordpress:/var/www/html
 
   db:
+    # use latest or specify version
     image: mysql:5.7
     restart: always
     environment:
