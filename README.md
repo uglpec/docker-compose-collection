@@ -1,1 +1,1 @@
-# docker-compose-collection
+# Ready to use compose files
