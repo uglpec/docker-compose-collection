@@ -4,7 +4,7 @@ services:
 
   wordpress:
     # use latest tag or specify version
-    image: bitnami/wordpress:4.9.8
+    image: bitnami/wordpress-nginx:4.9.8
     restart: always
     depends_on:
       - db
