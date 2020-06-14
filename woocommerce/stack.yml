@@ -14,7 +14,7 @@ services:
       WORDPRESS_DB_PASSWORD: examplepass
       WORDPRESS_DB_NAME: exampledb
     volumes:
-      - ${PWD}/docker-compose-collections/woocommerce/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ${PWD}/files/woocommerce/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - wordpress:/var/www/html
 
   db:
