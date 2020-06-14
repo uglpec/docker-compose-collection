@@ -4,33 +4,31 @@ services:
 
   wordpress:
     # use latest tag or specify version
-    image: bitnami/wordpress-nginx:4.9.8
+    image: wordpress:4.9.8-php7.2-apache
     restart: always
-    depends_on:
-      - db
     ports:
       - 8080:80
-      - 8443:443
     environment:
-      - MARIADB_HOST=db
-      - MARIADB_PORT_NUMBER=3306
-      - WORDPRESS_DATABASE_USER=bn_wordpress
-      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
     volumes:
-      - wordpress:/bitnami/wordpress
-      - ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf:ro
+      - ${PWD}/files/woocommerce/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wordpress:/var/www/html
 
   db:
     # use latest or specify version
-    image: bitnami/mariadb:10.3
+    image: mysql:5.7
     restart: always
     environment:
-      - MARIADB_USER=bn_wordpress
-      - MARIADB_DATABASE=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_INITDB_SKIP_TZINFO: 'true'
     volumes:
-      - db:/bitnami/mariadb
+      - db:/var/lib/mysql
 
 volumes:
   wordpress:
