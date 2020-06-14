@@ -19,6 +19,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - wordpress:/bitnami/wordpress
+      - ./wordpress-server-block.conf:/opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf:ro
 
   db:
     # use latest or specify version
