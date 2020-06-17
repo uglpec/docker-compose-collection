@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  prestashop:
+    image: prestashop/prestashop:1.7-7.1-apache
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+    environment:
+      PS_DEV_MODE: 'false'
+      DB_SERVER: db
+      DB_USER: prestashop
+      DB_PASSWD: prestashop
+      DB_NAME: prestashop
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_INITDB_SKIP_TZINFO: 'true'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
